@@ -1,9 +1,9 @@
 'use strict';
 
-var mysql = require('mysql');
-var config = require('config');
-var env = config.get("envConfig").environment;
-var dbInfo = require("./config.json");
+var mysql = require('mysql'),
+		config = require('config'),
+		env = config.get("envConfig").environment,
+		dbInfo = require("./config.json");
 
 var conn = mysql.createConnection({
 	host: dbInfo[env].host,
