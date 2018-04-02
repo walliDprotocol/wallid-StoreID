@@ -22,7 +22,8 @@
     "mysql": "2.15.0",
     "nodemon": "1.17.2",
     "openssl-wrapper": "~0.3.4",
-    "pug": "2.0.0-beta11"
+    "pug": "2.0.0-beta11",
+    "x509": "0.3.3"
   },
   "author": "Jose Reis",
   "license": "ISC"
