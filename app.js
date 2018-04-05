@@ -5,11 +5,10 @@ var express = require('express'),
 		logger = require('morgan'),
 		cookieParser = require('cookie-parser'),
 		bodyParser = require('body-parser'),
-		mysql= require('mysql'),
 		http = require('http'),
 		listEndpoints = require('express-list-endpoints'),
 		index = require('./routes/index'),
-		storeBlockId = require('./routes/store_blockid'),
+		storeId = require('./routes/store'),
 		verifyId = require('./routes/verify'),
 		app = express();
 
@@ -22,17 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/api/store_blockid', storeBlockId);
-app.use('/api/verify', verifyId);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-	var err = new Error('Not Found');
-	err.status = 404;
-	next(err);
-});
-
+// disable cors
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
@@ -46,6 +35,17 @@ app.use(function(req, res, next) {
 	} else {
 		next();
 	}
+});
+
+app.use('/', index);
+app.use('/api/store', storeId);
+app.use('/api/verify', verifyId);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+	var err = new Error('Not Found');
+	err.status = 404;
+	next(err);
 });
 
 app.use(function(err, req, res, next) {
