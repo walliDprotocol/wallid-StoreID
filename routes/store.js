@@ -23,7 +23,7 @@ router.post('/', function(req, res, next) {
 				if(err) {
 					res.status(500).send(JSON.stringify({"status": 500, "data": null, "message": err}));
 				} else {
-					res.send(JSON.stringify({"status": 200, "data": result, "message": "Record updated"}));
+					res.send(JSON.stringify({"status": 200, "data": null, "message": "Record updated"}));
 				}
 			});
 		} else {
@@ -31,7 +31,7 @@ router.post('/', function(req, res, next) {
 				if(err) {
 					res.status(500).send(JSON.stringify({"status": 500, "data": null, "message": err}));
 				} else {
-					res.send(JSON.stringify({"status": 200, "data": result, "message": "Record created"}));
+					res.send(JSON.stringify({"status": 200, "data": null, "message": "Record created"}));
 				}
 			});
 		}

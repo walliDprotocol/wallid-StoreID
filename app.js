@@ -6,7 +6,12 @@ var express = require('express'),
 		cookieParser = require('cookie-parser'),
 		bodyParser = require('body-parser'),
 		http = require('http'),
-		listEndpoints = require('express-list-endpoints'),
+		https = require('https'),
+		fs = require('fs'),
+		privateKey = fs.readFileSync('/ssl/api.block-id.io/privkey.pem', 'utf8'),
+		certificate = fs.readFileSync('/ssl/api.block-id.io/fullchain.pem', 'utf8'),
+		credentials = {key: privateKey, cert: certificate},
+		// listEndpoints = require('express-list-endpoints'),
 		index = require('./routes/index'),
 		storeId = require('./routes/store'),
 		verifyId = require('./routes/verify'),
@@ -21,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// disable cors
+// enable cors
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
@@ -57,5 +62,7 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-var server = http.createServer(app);
-server.listen(3000);
+var httpServer = http.createServer(app),
+		httpsServer = https.createServer(credentials, app);
+httpServer.listen(2000);
+httpsServer.listen(3000);
