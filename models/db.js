@@ -5,16 +5,12 @@ var mysql = require('mysql'),
 		env = config.get("envConfig").environment,
 		dbInfo = require("./config.json");
 
-var conn = mysql.createConnection({
+var conn = mysql.createPool({
+	connectionLimit: 10,
 	host: dbInfo[env].host,
 	user: dbInfo[env].user,
 	password: dbInfo[env].pass,
 	database: dbInfo[env].database
-});
-
-conn.connect(function(err) {
-	if (err) throw err;
-	console.log("Connected!");
 });
 
 module.exports = conn;
