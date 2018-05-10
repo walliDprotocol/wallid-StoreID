@@ -1,8 +1,7 @@
 'use strict';
 
 var mysql = require('mysql'),
-		config = require('config'),
-		env = config.get("envConfig").environment,
+		env = require('config').get("environment"),
 		dbInfo = require("./config.json");
 
 var conn = mysql.createPool({

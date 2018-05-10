@@ -1,5 +1,3 @@
 {
-	"envConfig": {
-		"environment": "development"
-	}
+	"environment": "development"
 }
