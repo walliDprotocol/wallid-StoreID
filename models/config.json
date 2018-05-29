@@ -1,0 +1,16 @@
+{
+	"development": {
+		"host": "127.0.0.1",
+		"user": "userdb",
+		"pass": "password",
+		"database": "blockid_dev",
+		"port": "3306"
+	},
+	"production": {
+		"host": "127.0.0.1",
+		"user": "userdb",
+		"pass": "password",
+		"database": "blockid",
+		"port": "3306"
+	}
+}
