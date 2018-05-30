@@ -3,14 +3,14 @@
 		"host": "127.0.0.1",
 		"user": "userdb",
 		"pass": "password",
-		"database": "blockid_dev",
+		"database": "wallid_dev",
 		"port": "3306"
 	},
 	"production": {
 		"host": "127.0.0.1",
 		"user": "userdb",
 		"pass": "password",
-		"database": "blockid",
+		"database": "wallid",
 		"port": "3306"
 	}
 }

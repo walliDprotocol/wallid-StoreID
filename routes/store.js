@@ -15,9 +15,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-	let wallet_address = ( (req.body.wallet_address != null) ? req.body.wallet_address : null );
+	let wallet_address = ( (req.body.wallet_address != null) ? req.body.wallet_address : null ),
+			id_type = ( (req.body.id_type != null) ? req.body.id_type : null );
 
-	conn.checkIfExist(wallet_address, function(err, result) {
+	conn.checkIfExist(wallet_address, id_type, function(err, result) {
 		if(result != '') {
 			conn.updateInfo(req.body, function(err, result) {
 				if(err) {
