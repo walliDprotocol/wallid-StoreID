@@ -14,7 +14,6 @@ var express = require('express'),
 		// listEndpoints = require('express-list-endpoints'),
 		index = require('./routes/index'),
 		storeId = require('./routes/store'),
-		verifyId = require('./routes/verify'),
 		app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -44,7 +43,6 @@ app.use(function(req, res, next) {
 
 app.use('/', index);
 app.use('/api/store', storeId);
-app.use('/api/verify', verifyId);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
