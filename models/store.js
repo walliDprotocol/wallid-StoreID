@@ -5,14 +5,14 @@ var storeId = {
 	getAllInfo: function(callback) {
 		return db.query("SELECT * FROM storeid", callback);
 	},
-	checkIfExist: function(wallet_address, id_type, callback) {
-		return db.query("SELECT creation_date FROM storeid WHERE wallet_address = ? AND id_type = ?",[wallet_address, id_type], callback);
+	checkIfExist: function(idt, wallet_address, callback) {
+		return db.query("SELECT creation_date FROM storeid WHERE id_person = ?",[idt+wallet_address], callback);
 	},
-	addInfo: function(importId, callback) {
-		return db.query("INSERT INTO storeid (wallet_address, id_type, verifyid) VALUES (?, ?, ?)",[importId.wallet_address, importId.id_type, importId.verifyid], callback);
+	addInfo: function(data, callback) {
+		return db.query("INSERT INTO storeid (idt, idt_name, wallet_address, certificate, sod, wallet_signature) VALUES (?, ?, ?, ?, ?, ?)",[data.idt, data.idtName, data.verifyID.walletAddress, data.verifyID.certificate, data.verifyID.sod, data.verifyID.walletSignature], callback);
 	},
-	updateInfo: function(importId, callback) {
-		return db.query("UPDATE storeid SET verifyid = ? WHERE wallet_address = ? AND id_type = ?",[importId.verifyid, importId.wallet_address, importId.id_type], callback);
+	updateInfo: function(data, callback) {
+		return db.query("UPDATE storeid SET idt_name = ?, certificate = ?, sod = ?, wallet_signature = ? WHERE id_person = ?",[data.idtName, data.verifyID.certificate, data.verifyID.sod, data.verifyID.walletSignature, data.idt+data.verifyID.walletAddress], callback);
 	}
 };
 

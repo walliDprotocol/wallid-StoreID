@@ -15,12 +15,13 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-	let wallet_address = ( (req.body.wallet_address != null) ? req.body.wallet_address : null ),
-			id_type = ( (req.body.id_type != null) ? req.body.id_type : null );
+	let request = req.body.dataID.data,
+			wallet_address = ( (request.verifyID.walletAddress != null) ? request.verifyID.walletAddress : null ),
+			idt = ( (request.idt != null) ? request.idt : null );
 
-	conn.checkIfExist(wallet_address, id_type, function(err, result) {
+	conn.checkIfExist(idt, wallet_address, function(err, result) {
 		if(result != '') {
-			conn.updateInfo(req.body, function(err, result) {
+			conn.updateInfo(request, function(err, result) {
 				if(err) {
 					res.status(500).send(JSON.stringify({"status": 500, "data": null, "message": err}));
 				} else {
@@ -28,7 +29,7 @@ router.post('/', function(req, res, next) {
 				}
 			});
 		} else {
-			conn.addInfo(req.body, function(err, result) {
+			conn.addInfo(request, function(err, result) {
 				if(err) {
 					res.status(500).send(JSON.stringify({"status": 500, "data": null, "message": err}));
 				} else {
