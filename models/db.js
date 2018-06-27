@@ -3,7 +3,7 @@
 var mysql = require('mysql'),
 		// env = require('config').get("environment"),
 		env = process.env.ENV || 'development',
-		db = process.env.DB_HOST || require("./config.json").env;
+		db = process.env.DB_HOST || require("./config.json")[env];
 
 var conn = mysql.createPool({
 	connectionLimit: 10,
