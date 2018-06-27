@@ -1,9 +1,9 @@
 'use strict';
 
 var mysql = require('mysql'),
-		// env = require('config').get("environment"),
 		env = process.env.ENV || 'development',
-		db = process.env.DB_HOST || require("./config.json")[env];
+		db = (env === 'production') ? {"host": process.env.DB_HOST, "user": process.env.DB_USER, "pass": process.env.DB_PASS, "database": process.env.DB_NAME} : require("./config.json")[env];
+		console.log("db: ", db)
 
 var conn = mysql.createPool({
 	connectionLimit: 10,
