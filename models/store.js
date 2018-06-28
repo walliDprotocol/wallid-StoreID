@@ -15,7 +15,7 @@ var storeId = {
 		return db.query("INSERT INTO storeid (idt, idt_name, wallet_address, verify_id) VALUES (?, ?, ?, ?)", [data.idt, data.idtName, data.wa, JSON.stringify(data.verifyID)], callback);
 	},
 	updateInfo: function(data, callback) {
-		return db.query("UPDATE storeid SET idt_name = ?, verify_id = ? WHERE idt = ? AND wallet_address = ?", [data.idtName, data.verifyID, data.idt, data.wa], callback);
+		return db.query("UPDATE storeid SET idt_name = ?, verify_id = ? WHERE idt = ? AND wallet_address = ?", [data.idtName, JSON.stringify(data.verifyID), data.idt, data.wa], callback);
 	}
 };
 
