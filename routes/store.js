@@ -5,8 +5,8 @@ var express = require('express'),
 		conn = require('./../models/store');
 
 router.get('/', function(req, res, next) {
-	let idt = (req.query.idt != null && req.query.idt != undefined) ? req.query.idt : null,
-			wallet_address = (req.query.walletAddress != null && req.query.walletAddress != undefined) ? req.query.walletAddress : null;
+	let idt = (req.query.idt != null && req.query.idt != undefined && req.query.id != '') ? req.query.idt : null,
+			wallet_address = (req.query.wa != null && req.query.wa != undefined && req.query.wa != '') ? req.query.wa : null;
 
 	if (idt != null && wallet_address != null) {
 		conn.getInfoById(idt, wallet_address, function(err, result) {
@@ -29,8 +29,8 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 	let request = req.body.dataID.data,
-			wallet_address = ( (request.verifyID.walletAddress != null && request.verifyID.walletAddress != undefined) ? request.verifyID.walletAddress : null ),
-			idt = ( (request.idt != null && request.idt != undefined) ? request.idt : null );
+			wallet_address = ( (request.wa != null && request.wa != undefined && request.wa != '') ? request.wa : null ),
+			idt = ( (request.idt != null && request.idt != undefined && request.idt != '') ? request.idt : null );
 
 	conn.checkIfExist(idt, wallet_address, function(err, result) {
 		if(result != '') {
