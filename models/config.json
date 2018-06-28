@@ -1,16 +1,7 @@
 {
-	"development": {
-		"host": "127.0.0.1",
-		"user": "userdb",
-		"pass": "password",
-		"database": "wallid_dev",
-		"port": "3306"
-	},
-	"production": {
-		"host": "127.0.0.1",
-		"user": "userdb",
-		"pass": "password",
-		"database": "wallid",
-		"port": "3306"
-	}
+	"host": "DB_HOST",
+	"user": "DB_USER",
+	"pass": "DB_PASS",
+	"database": "DB_NAME",
+	"port": "3306"
 }

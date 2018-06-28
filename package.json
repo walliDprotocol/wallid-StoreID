@@ -6,7 +6,7 @@
   "main": "app.js",
   "scripts": {
     "prestart": "npm install",
-    "start": "ENV='production' pm2 start app.js -n storeID --watch",
+    "start": "pm2 start app.js -n storeID --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

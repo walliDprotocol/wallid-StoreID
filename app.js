@@ -59,7 +59,5 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-var httpServer = http.createServer(app),
-		httpsServer = https.createServer(credentials, app);
-httpServer.listen(2000);
-httpsServer.listen(3000);
+var server = https.createServer(credentials, app);
+server.listen(3000);
