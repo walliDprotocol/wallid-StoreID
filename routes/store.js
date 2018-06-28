@@ -21,7 +21,13 @@ router.get('/', function(req, res, next) {
 			if(err) {
 				res.status(500).send(JSON.stringify({"status": 500, "data": null, "message": err}));
 			} else {
-				res.status(200).send(JSON.stringify({"status": 200, "data": result, "message": null}));
+				var parsed_data = result;
+
+				for (var i = 0; i < result.length; i++) {
+					parsed_data[i].verify_id = JSON.parse(result[i].verify_id);
+				}
+
+				res.status(200).send(JSON.stringify({"status": 200, "data": parsed_data, "message": null}));
 			}
 		});
 	}
