@@ -11,23 +11,31 @@ router.get('/', function(req, res, next) {
 	if (idt != null && wallet_address != null) {
 		conn.getInfoById(idt, wallet_address, function(err, result) {
 			if(err) {
-				res.status(500).send(JSON.stringify({"status": 500, "data": null, "message": err}));
+				res.status(500).send(JSON.stringify({"data": null, "message": err}));
 			} else {
-				res.status(200).send(JSON.stringify({"status": 200, "data": result, "message": null}));
+				if (result.length > 0) {
+					res.status(200).send(JSON.stringify({"data": result, "message": null}));
+				} else {
+					res.status(204).send(JSON.stringify({"data": null, "message": null}));
+				}
 			}
 		});
 	} else {
 		conn.getAllInfo(function(err, result) {
 			if(err) {
-				res.status(500).send(JSON.stringify({"status": 500, "data": null, "message": err}));
+				res.status(500).send(JSON.stringify({"data": null, "message": err}));
 			} else {
-				var parsed_data = result;
+				if (result.length > 0) {
+					var parsed_data = result;
 
-				for (var i = 0; i < result.length; i++) {
-					parsed_data[i].verify_id = JSON.parse(result[i].verify_id);
+					for (var i = 0; i < result.length; i++) {
+						parsed_data[i].verify_id = JSON.parse(result[i].verify_id);
+					}
+
+					res.status(200).send(JSON.stringify({"data": parsed_data, "message": null}));
+				} else {
+					res.status(204).send(JSON.stringify({"data": null, "message": null}));
 				}
-
-				res.status(200).send(JSON.stringify({"status": 200, "data": parsed_data, "message": null}));
 			}
 		});
 	}
@@ -42,17 +50,17 @@ router.post('/', function(req, res, next) {
 		if(result != '') {
 			conn.updateInfo(request, function(err, result) {
 				if(err) {
-					res.status(500).send(JSON.stringify({"status": 500, "data": null, "message": err}));
+					res.status(500).send(JSON.stringify({"data": null, "message": err}));
 				} else {
-					res.status(200).send(JSON.stringify({"status": 200, "data": null, "message": "Record updated"}));
+					res.status(200).send(JSON.stringify({"data": null, "message": "Record updated"}));
 				}
 			});
 		} else {
 			conn.addInfo(request, function(err, result) {
 				if(err) {
-					res.status(500).send(JSON.stringify({"status": 500, "data": null, "message": err}));
+					res.status(500).send(JSON.stringify({"data": null, "message": err}));
 				} else {
-					res.status(200).send(JSON.stringify({"status": 200, "data": null, "message": "Record created"}));
+					res.status(200).send(JSON.stringify({"data": null, "message": "Record created"}));
 				}
 			});
 		}
