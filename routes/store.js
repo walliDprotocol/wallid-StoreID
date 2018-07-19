@@ -26,13 +26,7 @@ router.get('/', function(req, res, next) {
 				res.status(500).send(JSON.stringify({"data": null, "message": err}));
 			} else {
 				if (result.length > 0) {
-					var parsed_data = result;
-
-					for (var i = 0; i < result.length; i++) {
-						parsed_data[i].verify_id = JSON.parse(result[i].verify_id);
-					}
-
-					res.status(200).send(JSON.stringify({"data": parsed_data, "message": null}));
+					res.status(200).send(JSON.stringify({"data": result, "message": null}));
 				} else {
 					res.status(404).send(JSON.stringify({"data": null, "message": 'No records'}));
 				}
