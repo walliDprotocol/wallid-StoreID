@@ -6,7 +6,7 @@
   "main": "app.js",
   "scripts": {
     "prestart": "npm install",
-    "start": "pm2 start app.js -n storeID --watch",
+    "start": "pm2 start app.js -n storeID",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -21,7 +21,8 @@
     "http-errors": "~1.6.2",
     "morgan": "~1.9.0",
     "mysql": "~2.15.0",
-    "pug": "~2.0.0-beta11"
+    "pug": "~2.0.0-beta11",
+    "web3": "^1.0.0-beta.34"
   },
   "author": "Jose Reis",
   "license": "ISC"
