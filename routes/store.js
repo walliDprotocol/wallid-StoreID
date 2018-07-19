@@ -10,19 +10,19 @@ router.get('/', function(req, res, next) {
 
 	if (idt != null && wallet_address != null) {
 		conn.getInfoById(idt, wallet_address, function(err, result) {
-			if(err) {
+			if (err) {
 				res.status(500).send(JSON.stringify({"data": null, "message": err}));
 			} else {
 				if (result.length > 0) {
 					res.status(200).send(JSON.stringify({"data": result, "message": null}));
 				} else {
-					res.status(204).send(JSON.stringify({"data": null, "message": null}));
+					res.status(404).send(JSON.stringify({"data": null, "message": 'No records'}));
 				}
 			}
 		});
 	} else {
 		conn.getAllInfo(function(err, result) {
-			if(err) {
+			if (err) {
 				res.status(500).send(JSON.stringify({"data": null, "message": err}));
 			} else {
 				if (result.length > 0) {
@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
 
 					res.status(200).send(JSON.stringify({"data": parsed_data, "message": null}));
 				} else {
-					res.status(204).send(JSON.stringify({"data": null, "message": null}));
+					res.status(404).send(JSON.stringify({"data": null, "message": 'No records'}));
 				}
 			}
 		});
@@ -47,9 +47,9 @@ router.post('/', function(req, res, next) {
 			idt = ( (request.idt != null && request.idt != undefined && request.idt != '') ? request.idt : null );
 
 	conn.checkIfExist(idt, wallet_address, function(err, result) {
-		if(result != '') {
+		if (result != '') {
 			conn.updateInfo(request, function(err, result) {
-				if(err) {
+				if (err) {
 					res.status(500).send(JSON.stringify({"data": null, "message": err}));
 				} else {
 					res.status(200).send(JSON.stringify({"data": null, "message": "Record updated"}));
@@ -57,7 +57,7 @@ router.post('/', function(req, res, next) {
 			});
 		} else {
 			conn.addInfo(request, function(err, result) {
-				if(err) {
+				if (err) {
 					res.status(500).send(JSON.stringify({"data": null, "message": err}));
 				} else {
 					res.status(200).send(JSON.stringify({"data": null, "message": "Record created"}));
