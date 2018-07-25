@@ -1,14 +1,13 @@
 'use strict';
 
-var mysql = require('mysql'),
-		db = require("./config.json");
+var mysql = require('mysql');
 
 var conn = mysql.createPool({
 	connectionLimit: 10,
-	host: process.env[db.host],
-	user: process.env[db.user],
-	password: process.env[db.pass],
-	database: process.env[db.database]
+	host: process.env.DB_HOST,
+	user: process.env.DB_USER,
+	password: process.env.DB_PASS,
+	database: process.env.DB_NAME
 });
 
 module.exports = conn;
