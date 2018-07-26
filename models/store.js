@@ -44,12 +44,6 @@ let store = {
   addOrUpdateInfo: function (data, callback) {
     return storeidModel.findOneAndUpdate({ 'idt': data.idt, 'wa': data.wa }, { idt: data.idt, idtName: data.idtName, wa: data.wa, verifyID: data.verifyID }, { upsert: true, new: true, setDefaultsOnInsert: true }, callback );
   }
-  // updateInfo: function (idt, wa, data, callback) {
-  //   return storeidModel.findOneAndUpdate({ 'idt': idt, 'wa': wa }, data, callback);
-  // },
-  // addInfo: function (data, callback) {
-  //   return storeidModel.create(data, callback);
-  // }
 }
 
 module.exports = store;

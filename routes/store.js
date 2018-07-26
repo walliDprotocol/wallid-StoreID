@@ -42,8 +42,6 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 	let request = req.body.dataID.data;
-	/* let wa = (request.wa !== null && request.wa !== undefined && request.wa !== '') ? request.wa : null;
-	let idt = (request.idt !== null && request.idt !== undefined && request.idt !== '') ? request.idt : null;*/
 
  	conn.addOrUpdateInfo(request, function(err, result) {
 		if (err) {
@@ -53,24 +51,6 @@ router.post('/', function(req, res, next) {
 			res.status(200).send({"data": null, "message": "Data stored"});
 		}
 	});
-
-	// conn.updateInfo(idt, wa, request, function(err, result) {
-	// 	if (err) {
-	// 		res.status(500).send({"data": null, "message": err});
-	// 	} else {
-	// 		if (result === null) {
-	// 			conn.addInfo(request, function(err, result) {
-	// 				if (err) {
-	// 					res.status(500).send({"data": null, "message": err});
-	// 				} else {
-	// 					res.status(200).send({"data": null, "message": "Record created"});
-	// 				}
-	// 			});
-	// 		} else {
-	// 			res.status(200).send({"data": null, "message": "Record updated"});
-	// 		}
-	// 	}
-	// });
 });
 
 module.exports = router;
