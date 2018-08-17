@@ -1,19 +1,19 @@
 'use strict';
 
-var express = require('express'),
-		path = require('path'),
-		logger = require('morgan'),
-		cookieParser = require('cookie-parser'),
-		bodyParser = require('body-parser'),
-		http = require('http'),
-		https = require('https'),
-		fs = require('fs'),
-		privateKey = fs.readFileSync('/ssl/tls.key', 'utf8'),
-		certificate = fs.readFileSync('/ssl/tls.crt', 'utf8'),
-		credentials = {key: privateKey, cert: certificate},
-		index = require('./routes/index'),
-		storeId = require('./routes/store'),
-		app = express();
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const http = require('http');
+const https = require('https');
+const fs = require('fs');
+const privateKey = fs.readFileSync('/ssl/tls.key', 'utf8');
+const certificate = fs.readFileSync('/ssl/tls.crt', 'utf8');
+const credentials = {key: privateKey, cert: certificate};
+const index = require('./routes/index');
+const storeId = require('./routes/store');
+const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -35,6 +35,7 @@ app.use(function(req, res, next) {
 		//respond with 200
 		res.status(200);
 		res.json();
+
 	} else {
 		next();
 	}
@@ -45,7 +46,7 @@ app.use('/api/v1/data', storeId);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-	var err = new Error('Not Found');
+	let err = new Error('Not Found');
 	err.status = 404;
 	next(err);
 });
@@ -59,5 +60,5 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-var server = https.createServer(credentials, app);
+let server = https.createServer(credentials, app);
 server.listen(3000);
