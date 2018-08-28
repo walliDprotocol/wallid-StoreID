@@ -42,7 +42,9 @@ let store = {
     return storeidModel.find({ 'idt': idt, 'wa': wa }, { '_id': false, '__v': false }, callback);
   },
   addOrUpdateInfo: function (data, callback) {
-    return storeidModel.findOneAndUpdate({ 'idt': data.idt, 'wa': data.wa }, { idt: data.idt, idtName: data.idtName, wa: data.wa, verifyID: data.verifyID }, { upsert: true, new: true, setDefaultsOnInsert: true }, callback );
+    let wa = data.wa.toLowerCase();
+    // Add new variable for WA in lowercase and replace data.wa for that variable
+    return storeidModel.findOneAndUpdate({ 'idt': data.idt, 'wa': wa }, { 'idt': data.idt, 'idtName': data.idtName, 'wa': wa, 'verifyID': data.verifyID }, { 'upsert': true, 'new': true, 'setDefaultsOnInsert': true }, callback );
   }
 }
 

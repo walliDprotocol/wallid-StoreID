@@ -5,10 +5,13 @@ const router = express.Router();
 const conn = require('./../models/store');
 
 router.get('/', function(req, res, next) {
-	let idt = (req.query.idt != null && req.query.idt != undefined && req.query.id != '') ? req.query.idt : null;
-	let	wa = (req.query.wa != null && req.query.wa != undefined && req.query.wa != '') ? req.query.wa : null;
+	let idt = (req.query.idt !== null && req.query.idt !== undefined && req.query.id !== '') ? req.query.idt : null;
+	let	wa = (req.query.wa !== null && req.query.wa !== undefined && req.query.wa !== '') ? req.query.wa : null;
 
-	if (idt != null && wa != null) {
+	if (idt !== null && wa !== null) {
+		// TO DO: check if needed convert the WA to lowercase
+		wa = wa.toLowerCase();
+
 		conn.getInfoById(idt, wa, function(err, result) {
 			if (err) {
 				res.status(500).send({"data": null, "message": err});
@@ -42,6 +45,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 	let request = req.body.dataID.data;
+	// TO DO: check if needed convert the WA to lowercase
 
  	conn.addOrUpdateInfo(request, function(err, result) {
 		if (err) {
