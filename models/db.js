@@ -7,8 +7,9 @@ url += process.env.DB_PASS + '@';
 url += process.env.DB_HOST + ':';
 url += process.env.DB_PORT + '/';
 url += process.env.DB_NAME;
+url += '?authSource=admin';
 
-mongoose.connect(url + '?authSource=admin', { useNewUrlParser: true });
+mongoose.connect(url, { useNewUrlParser: true });
 
 let db = {
 	schema: mongoose.Schema,
