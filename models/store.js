@@ -39,11 +39,11 @@ let store = {
   getAllInfo: function (callback) {
     return storeidModel.find({}, { '_id': false, '__v': false }, callback);
   },
-  getInfoById: function (idt, wa, callback) {
-    return storeidModel.find({ 'idt': idt, 'wa': wa }, { '_id': false, '__v': false }, callback);
+  getInfoById: function (criteria, callback) {
+    return storeidModel.find(criteria, { '_id': false, '__v': false }, callback);
   },
-  addOrUpdateInfo: function (data, callback) {
-    return storeidModel.findOneAndUpdate({ 'idt': data.idt, 'wa': wa }, { 'idt': data.idt, 'idtName': data.idtName, 'wa': data.wa, 'verifyID': data.verifyID }, { 'upsert': true, 'new': true, 'setDefaultsOnInsert': true }, callback );
+  addOrUpdateInfo: function (criteria, data, callback) {
+    return storeidModel.findOneAndUpdate(criteria, { $set: data }, { 'upsert': true, 'new': true, 'setDefaultsOnInsert': true }, callback );
   }
 }
 
