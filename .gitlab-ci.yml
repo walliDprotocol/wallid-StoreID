@@ -1,0 +1,18 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  TAG: $CI_PIPELINE_ID
+  FILES_PATH: /mnt/build-images/k8s/wallid-storeid
+
+build:
+  stage: build
+  environment: development
+  only:
+  - master
+  tags:
+  - storeID
+  - docker image
+  script:
+  - $FILES_PATH/build-image.sh
