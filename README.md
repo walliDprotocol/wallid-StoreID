@@ -3,19 +3,19 @@
 # Wallid - DataID Structure
 ```
 {
-	"dataID": {
-		"storeIDProvider": {
-			"wa": "0x0x67E191D4bA926E49b139BD927ba34E5034ac550a",
-			"name": "wallid-storeid",
-			"url": "https://api.block-id.io/api/store"
-		},
-		"data": {
-			"wa": "0xE33C85c506F54fa369e7858bd698962fF8443A57",
-			"idt": "CC_PT",
-			"idtName": "Citizen Card - Portuguese Republic",
-			"identityID": {}
-			"verifyID": {}
-		}
-	}
+   "dataID":{
+      "storeIDProvider":{
+         "wa":"0x67E191D4bA926E49b139BD927ba34E5034ac550a",
+         "name":"wallid-storeid",
+         "url":"https://storeid.caixamagica.pt/api/v1/data"
+      },
+      "data":{
+         "wa":"0x6Ff539fDE26ec962cC22B2e74c66c774fd38B1D2",
+         "idt":"CC_PT_TST",
+         "idtName":"Citizen Card TST - Portuguese Republic",
+         "identityID":{},
+         "verifyID":{}
+      }
+   }
 }
 ```
